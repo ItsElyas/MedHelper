@@ -21,4 +21,19 @@ body {
         h1 {
             margin: 0;
         }
-        
+#LogInButton{
+            background-color: white;
+            color: #1c6fc2;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed; 
+            top: 50px; 
+            right: 20px; 
+        }
+        #LogInButton:hover {
+            transition: 0.3s;
+            background-color: #b5b8bb;
+       
+}       
