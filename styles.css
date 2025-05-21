@@ -29,11 +29,30 @@ body {
             border-radius: 5px;
             cursor: pointer;
             position: fixed; 
-            top: 50px; 
-            right: 20px; 
+            top: 40px; 
+            right: 25px; 
         }
         #LogInButton:hover {
             transition: 0.3s;
-            background-color: #b5b8bb;
+            background-color: #1c7bda;
        
 }       
+
+#button-container{
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        #button-container button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        #button-container button:hover {
+            transition: 0.3s;
+            background-color: #155a8a;
+        }

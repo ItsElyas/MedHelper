@@ -12,7 +12,7 @@ def home():             # when someone visits "/", run this
 def ping():
     return jsonify({"message": "pong"})
 
-@app.route("/medicine")
+@app.route("/status")
 def status():
     return jsonify({
         "medicine_taken": False,
