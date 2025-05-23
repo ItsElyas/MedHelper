@@ -1,5 +1,4 @@
-# backend/app.py
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 app = Flask(__name__)  # creates a Flask app
 
@@ -7,6 +6,13 @@ app = Flask(__name__)  # creates a Flask app
 def home():             # when someone visits "/", run this
     return "Welcome to the MedTracker Backend!"
 
+@app.route("/homepage")
+def homepage():
+    return render_template("home.html")
+
+@app.route("/index")
+def index():
+    return render_template("index.html")
 
 @app.route("/ping")
 def ping():
