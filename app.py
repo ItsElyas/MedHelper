@@ -1,6 +1,19 @@
 from flask import Flask, jsonify, render_template
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)  # creates a Flask app
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///medtracker.db'  # SQLite database
+db = SQLAlchemy(app)  # initializes the database
+# Define your database models here
+
+class Medicine(db.Model):
+     id = db.Column(db.Integer, primary_key=True)  
+     name = db.Column(db.String(150), nullable=False)
+     date_created = db.Column(db.DateTime, default=datetime.utcnow)  
+    
+def __repr__(self):
+    return f'<Medicine {self.name}>'
 
 @app.route("/")         # this sets the route
 def home():             # when someone visits "/", run this
