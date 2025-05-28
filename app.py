@@ -10,7 +10,7 @@ db = SQLAlchemy(app)  # initializes the database
 class Medicine(db.Model):
      id = db.Column(db.Integer, primary_key=True)  
      name = db.Column(db.String(150), nullable=False)
-     date_created = db.Column(db.DateTime, default=datetime.utcnow)  
+     date_created = db.Column(db.DateTime, default = datetime.utcnow)  
     
 def __repr__(self):
     return f'<Medicine {self.name}>'
@@ -22,6 +22,10 @@ def home():             # when someone visits "/", run this
 @app.route("/homepage")
 def homepage():
     return render_template("home.html")
+
+@app.route("/medicine")
+def medicine():
+    return render_template("medicine.html")
 
 @app.route("/index")
 def index():
