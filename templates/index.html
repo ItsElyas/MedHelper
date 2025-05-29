@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedTracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+</head> 
+<body>
+    <h1 class="center">Medicine Tracker</h1>
+    <p class="center">This is a clean starter page. Customize it as you like!</p>
+    <div class="dashboard">
+    <div class="todaysProgress">
+        <h1>Today's Progress</h1>
+        <p id="progress"></p>
+    </div>
+    <div class="todaysDoses">
+        <h1>Doeses Today</h1>
+        <p id="todaysDoses"></p>
+        </div>
+    
+
+    <div class="todaysSchedule">
+        <h1>Today's Schedule</h1>
+        <p id="Schedule"></p>
+    </div>
+    <div class="yourMedicine">
+        <h1>Your Medications</h1>
+        <p id="yourMedicine"></p>
+    </div>
+    </div>
+</body>
+</html>
