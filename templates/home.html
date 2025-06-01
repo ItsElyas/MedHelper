@@ -13,10 +13,25 @@
         <p>Track your medications, set reminders, and manage your health easily with MedTracker.</p>
         <!-- Add your app content here -->
     </main>
-    <div id ="button-container">
-        <button id="AddMedication">Add a medication</button>
+        <div id ="button-container">
+
+        <button id="AddMedication"onclick="showForm">Add a medication</button>
+        <div id="MedicineDiv" style="display: none;">
+            <form class="medicineForm">
+                <label for="medicineName">Medicine Name:</label><br>
+                <input type="text" id="medicineName" name="medicineName"><br>
+
+                <label for="medicineDose">Medicine Dose:</label><br>
+                <input type="number" id="medicineDose" name="medicineDose"><br>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        
         <button id="Track">Track your medications </button>
         <button id="Reminders">Set reminders</button>   
     </div>  
     </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 {% endblock body %}
