@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedTracker</title>
@@ -10,13 +11,14 @@
 <body>
     <h1 class="center">Medicine Tracker</h1>
     <p class="center">This is a clean starter page. Customize it as you like!</p>
+    
     <div class="dashboard">
     <div class="todaysProgress">
         <h1>Today's Progress</h1>
         <p id="progress"></p>
     </div>
     <div class="todaysDoses">
-        <h1>Doeses Today</h1>
+        <h1>Doses Today</h1>
         <p id="todaysDoses"></p>
         </div>
     
@@ -25,10 +27,28 @@
         <h1>Today's Schedule</h1>
         <p id="Schedule"></p>
     </div>
-    <div class="yourMedicine">
+    
+    <div id="yourMedicine">
         <h1>Your Medications</h1>
-        <p id="yourMedicine"></p>
+        <ul id="yourMedicineList">
+        </ul>
+
+
+        <button onclick="showForm()" id="addMedicine">Add Medicine</button>
+
+        <div id="MedicineDiv" style="display: none;">
+            <form class="medicineForm">
+                <label for="medicineName">Medicine Name:</label><br>
+                <input type="text" id="medicineName" name="medicineName"><br>
+
+                <label for="medicineDose">Medicine Dose:</label><br>
+                <input type="number" id="medicineDose" name="medicineDose"><br>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </div>
     </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
