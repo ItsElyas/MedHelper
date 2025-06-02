@@ -55,20 +55,19 @@ body {
             padding-bottom: 8px;
         }
 
-        .todaysProgress, .todaysDoses, .todaysSchedule, .yourMedicine {
-            display: flex;
-            flex-direction: row;
-            gap: 50px;
-            justify-content: center;
-            align-items: center;
-            margin-top: 15px;
-            padding: 20px;
-            background-color: #2d545e;
+        .todaysProgress, .todaysDoses, .todaysSchedule {
             border-radius: 20px;
             border-width: 5px;
-            max-width: 600px;
             box-shadow: 0 5px 12px #12343b;
+            color: white;
         } 
+
+        .yourMedicine {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
     
         #addMedicine {
             border-radius: 8px;
@@ -77,5 +76,21 @@ body {
             color: white;
             box-shadow: 0 5px 12px #e6ebec;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #addMedicine :hover {
+            background: linear-gradient(135deg, #764ba2 0%, #3e59cf 100%);
+            color: #000000;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 6px 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
 
         }
