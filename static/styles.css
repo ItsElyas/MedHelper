@@ -76,6 +76,8 @@ body {
             color: white;
             box-shadow: 0 5px 12px #e6ebec;
             cursor: pointer;
+            max-width: 150px;
+            max-height: 250px;
             transition: 0.3s;
         }
 
