@@ -65,7 +65,7 @@ body {
         } 
 
 
-        #Schedule {
+        #Schedule, #noMedicine {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -81,16 +81,16 @@ body {
         }
     
         #addMedicine {
-            position: relative;
+            position:relative ;
             display: center;
             align-items: center;
-            text-decoration: none;
+            max-width: 500px;
             color: #ffffff;
             background: linear-gradient(135deg, #1e2f7a 0%, #764ba2 100%);
             padding: 14px 25px;
             border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s;
+            transition-duration: 0.3;
         }
 
         #addMedicine:hover {
@@ -99,6 +99,7 @@ body {
         }
 
         input, select {
+            align-items: center;
             width: 100%;
             padding: 6px 10px;
             margin: 8px 0;
@@ -136,7 +137,7 @@ body {
             transition: 0.3s;
         }
 
-        #delete {
+        #cancel {
             width: 100%;
             padding: 6px 10px;
             margin: auto;
@@ -150,7 +151,7 @@ body {
             transition: 0.3s;
         }
 
-        #delete:hover {
+        #cancel:hover {
             cursor: pointer;
             background-color: rgb(214, 31, 31);
             color: #f7f7f7;

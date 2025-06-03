@@ -20,19 +20,20 @@
         
     <div class="todaysDoses">
         <h1>Today's Medications</h1>
+        <p id="noMedicine">No doses scheduled for today</p>
         <p id="todaysDoses"></p>
         </div>
     
 
     <div class="todaysSchedule">
         <h1>Today's Schedule</h1>
-        <p id="Schedule">No medications in your schedule</p>
+        <p id="Schedule">No medications scheduled for today</p>
     </div>
     
     <div id="yourMedicine">
         <h1>Your Medications</h1>
-        <ul id="yourMedicineList">
-            
+        <p id="noMedicine">No medications added yet</p>
+        <ul id="yourMedicineList"></ul>      
 
         <button onclick="showForm()" id="addMedicine">Add Medicine</button><br>
 
@@ -54,9 +55,10 @@
 
                 <label for="timeForMedicine">Times to take:</label><br>
                 <input type="time" id="timeToTake" name="timeToTake"><br>
+                
             <div class='actionBtn'>
                 <input type="submit" value="Submit" id="submit">
-                <input type="submit" value="Delete" id="delete">
+                <input type="button" value="Cancel" id="cancel">
             </div>
             </form>
         </div>
