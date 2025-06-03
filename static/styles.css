@@ -81,21 +81,21 @@ body {
         }
     
         #addMedicine {
-            border-radius: 8px;
-            size: 10px;
-            text-align: center;
-            background: linear-gradient(135deg, #3e59cf 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 5px 12px #e6ebec;
+            position: relative;
+            display: center;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            background: linear-gradient(135deg, #1e2f7a 0%, #764ba2 100%);
+            padding: 14px 25px;
+            border-radius: 10px;
             cursor: pointer;
-            max-width: 150px;
-            max-height: 250px;
             transition: 0.3s;
         }
 
-        #addMedicine :hover {
+        #addMedicine:hover {
             background: linear-gradient(135deg, #764ba2 0%, #3e59cf 100%);
-            color: #000000;
+            color: #ffffff;
         }
 
         input, select {
