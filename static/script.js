@@ -1,8 +1,11 @@
 function showForm() {
-    const form = document.getElementById("MedicineDiv");
-    form.style.display = "block";
+    const form1 = document.getElementById("MedicineDiv");
+    form1.style.display = "block";
     document.getElementById("addMedicine").style.display = "none";
     
+    const form2 = document.getElementById("medicineList");
+    if (form2) form2.style.display = "block";
+    document.getElementById("addMedicine").style.display = "none";
 }
 //counter to tell user how many medications they are taken
 let medCount = 0;
