@@ -7,7 +7,10 @@ function showForm() {
 //counter to tell user how many medications they are taken
 let medCount = 0;
 
-function submit() {
+function submitMedicine() {
+    //Prevents page refreshing
+    event.preventDefault();
+
     // Gets all the values of the inputs
     const name = document.getElementById("medicineName").value;
     const dose = document.getElementById("medicineDose").value;
@@ -21,4 +24,24 @@ function submit() {
     }
 
     medCount++;
+    
+    const newMedDiv = document.createElement('div');
+    newMedDiv.className = "yourMedicineList";
+
+    newMedDiv.innerHTML = `
+        <strong>${name}</strong><br>
+        Dose: ${dose}mg<br>
+        Time: ${time}<br>
+    `;
+           //querySelector accesses an id/class appendChild adds a new instance of a variable
+    document.querySelector(".yourMedicineList").appendChild(newMedDiv);
+
+    // Hide "No medications" message
+    document.querySelectorAll("#yourMedicine #noMedicine").forEach(el => el.style.display = "none");
+
+    
+    document.querySelector(".medicineForm").reset();    // clears form
+    document.getElementById("MedicineDiv").style.display = "none";  //hides form
+    document.getElementById("addMedicine").style.display = "inline-block";  //reshows the add medicine btn
+
 }
