@@ -2,6 +2,8 @@ function showForm() {
     const form1 = document.getElementById("MedicineDiv");
     form1.style.display = "block";
     document.getElementById("addMedicine").style.display = "none";
+
+    document.querySelectorAll("#yourMedicine #noMedicine").forEach(el => el.style.display = "none");
     
     const form2 = document.getElementById("medicineList");
     if (form2) form2.style.display = "block";
@@ -9,6 +11,7 @@ function showForm() {
 }
 //counter to tell user how many medications they are taken
 let medCount = 0;
+
 
 function submitMedicine() {
     //Prevents page refreshing
@@ -48,3 +51,4 @@ function submitMedicine() {
     document.getElementById("addMedicine").style.display = "inline-block";  //reshows the add medicine btn
 
 }
+

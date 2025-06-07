@@ -73,7 +73,7 @@ body {
             opacity: 60%;
         }
 
-        .yourMedicine {
+        #yourMedicine {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
