@@ -1,6 +1,10 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__) # Create a Flask application
+
+app.config['SQLA']
+
+
 
 @app.route('/') # Defines the route for the index page
 def index():    # Function to handle requests to the index page
