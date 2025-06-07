@@ -12,6 +12,9 @@ function showForm() {
 //counter to tell user how many medications they are taken
 let medCount = 0;
 
+function cancelMedicine() {
+    
+}
 
 function submitMedicine() {
     //Prevents page refreshing
