@@ -40,8 +40,8 @@ function submitMedicine() {
     newMedDiv.innerHTML = `
         <strong>${name}</strong><br>
         Dose: ${dose}mg<br>
-        Time: ${time}<br>
-    `;
+        Time: ${time}<br>`
+        ;
            //querySelector accesses an id/class appendChild adds a new instance of a variable
     document.querySelector(".yourMedicineList").appendChild(newMedDiv);
 
