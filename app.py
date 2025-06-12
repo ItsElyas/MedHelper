@@ -16,9 +16,9 @@ class Medicine(db.Model):   #This creats a table called 'medicine
     def __repr__(self):
         return f'<Medicine {self.name}>'
 
-@app.route('/') # Defines the route for the index page
+@app.route('/', methods=['GET', 'POST']) # Defines the route for the index page
 def index():    # Function to handle requests to the index page
-    if request.method == "POST":
+    if request.method == 'POST':
         #add medicine tags
     return render_template('index.html')
 
