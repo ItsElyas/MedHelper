@@ -11,7 +11,7 @@ class Medicine(db.Model):   #This creats a table called 'medicine
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     dosage = db.Column(db.String(50), nullable=False)
-    time = db.Column(db.String(20), nullable=False)
+    time = db.Column(db.String(20), nullable=True)
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
@@ -33,4 +33,6 @@ def index():    # Function to handle requests to the index page
 
 
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
