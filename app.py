@@ -20,7 +20,15 @@ class Medicine(db.Model):   #This creats a table called 'medicine
 def index():    # Function to handle requests to the index page
     if request.method == 'POST':
         #add medicine tags
-    return render_template('index.html')
+        name = request.form['medicineName']
+        dosage = request.form['medicineDose']
+        new_medicine = Medicine(name=name, dosage=dosage)
+        db.session.add(new_medicine)
+        db.session.commit()
+        return redirect('/')
+    
+    meds = Medicine.query.all()
+    return render_template('index.html',medicines=meds)
 
 
 
