@@ -32,8 +32,16 @@
     
     <div id="yourMedicine">
         <h1>Your Medications</h1>
-        <p id="noMedicine">No medications added yet</p>
-        <div class="yourMedicineList" id="medicineList"></div>      
+        <div class="yourMedicineList" id="medicineList">
+            {% for med in medicines %}
+                <div class="medicineItem">
+                    <strong><h3>{{ med.name }}</h3></strong>
+                     <p>Dosage: {{ med.dosage }} mg</p>
+                </div>
+            {% else %}
+                    <p id="noMedicine">No medications added yet</p>
+            {% endfor %}
+        </div>      
 
         <button onclick="showForm()" id="addMedicine">Add Medicine</button><br>
 
