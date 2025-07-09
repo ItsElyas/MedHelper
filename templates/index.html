@@ -48,10 +48,10 @@
         <div id="MedicineDiv" style="display: none;">
             <form method="POST" class="medicineForm">
                 <label for="medicineName">Medicine Name:</label><br>
-                <input type="text" id="medicineName" name="medicineName"><br>
+                <input type="text" id="medicineName" name="medicineName" required><br>
 
                 <label for="medicineDose">Medicine Dose (mg):</label><br>
-                <input type="number" id="medicineDose" name="medicineDose"><br>
+                <input type="number" id="medicineDose" name="medicineDose"required><br>
 
                 <label for="Notes">Notes (Optinal)</label><br>
                 <input type="text" id="Notes" name="Notes"><br>
@@ -65,7 +65,7 @@
                 </select><br>
 
                 <label for="timeForMedicine">Times to take:</label><br>
-                <input type="time" id="timeToTake" name="timeToTake"><br>
+                <input type="time" id="timeToTake" name="timeToTake"required><br>
                 
             <div class='actionBtn'>
                 <input type="submit" value="Submit" id="submit" >
