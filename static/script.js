@@ -6,8 +6,10 @@ function showForm() {
     document.querySelectorAll("#yourMedicine #noMedicine").forEach(el => el.style.display = "none");
     
     const form2 = document.getElementById("medicineList");
-    if (form2) form2.style.display = "block";
-    document.getElementById("addMedicine").style.display = "none";
+    if (form2) {
+        form2.style.display = "none";
+    }
+    // document.getElementById("addMedicine").style.display = "none";
 }
 //counter to tell user how many medications they are taken
 let medCount = 0;
