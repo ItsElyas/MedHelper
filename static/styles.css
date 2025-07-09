@@ -59,6 +59,7 @@ body {
 
         .todaysProgress, .todaysDoses, .todaysSchedule {
             border-radius: 20px;
+            /* max-height: 250px; */
             border-width: 5px;
             box-shadow: 0 5px 12px #12343b;
             color: white;
@@ -159,9 +160,11 @@ body {
         }
 
         .yourMedicineList {
-            display: flex;
+            display: block;
+            max-height: 350px;
             flex-direction: column;
             gap: 6px;
+            overflow-y: scroll;
         }
         
         .medicine-item {
