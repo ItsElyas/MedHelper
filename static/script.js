@@ -15,7 +15,6 @@ function showForm() {
 let medCount = 0;
 
 function cancelMedicine() {
-    
 }
 
 // function submitMedicine() {
