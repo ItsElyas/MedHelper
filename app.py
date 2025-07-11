@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__) # Create a Flask application
 
@@ -22,6 +22,14 @@ def index():    # Function to handle requests to the index page
         #add medicine tags
         name = request.form['medicineName']
         dosage = request.form['medicineDose']
+        
+        if not name or not dosage:
+            return redirect('/')
+        
+        exising_med = Medicine.query.filter_by(name = name).first()
+        if exising_med:
+            return redirect('/')
+        
         new_medicine = Medicine(name=name, dosage=dosage)
         db.session.add(new_medicine)
         db.session.commit()
