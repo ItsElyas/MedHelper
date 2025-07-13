@@ -32,15 +32,22 @@ def index():    # Function to handle requests to the index page
             return redirect('/')
         
         new_medicine = Medicine(name=name, dosage=dosage)
-        db.session.add(new_medicine)
-        db.session.commit()
-        return redirect('/')
-    
-    meds = Medicine.query.all()
-    return render_template('index.html',medicines=meds)
+        
+        try:
+            db.session.add(new_medicine)
+            db.session.commit()
+            return redirect('/')
+        
+        except:
+            return 'There was an error adding your medication'
+            
+    else:
+        meds = Medicine.query.all()
+        return render_template('index.html',medicines=meds)
 
 @app.route('/delete/<int:id>')
 def delete(id):
+    medToDelete = Medicine.query.get_or_404(id)
     
 
 
