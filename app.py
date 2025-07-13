@@ -12,7 +12,7 @@ class Medicine(db.Model):   #This creats a table called 'medicine
     id = db.Column(db.Integer, primary_key=True) # This is an int that references the ID each entry
     name = db.Column(db.String(100), nullable=False)
     dosage = db.Column(db.String(50), nullable=False)
-    time = db.Column(db.Datetime, default=datetime.now(datetime.timezone.utc), nullable=True)   #FIX
+    # time = db.Column(db.Datetime, default=datetime.now(datetime.timezone.utc), nullable=True)   #FIX
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
@@ -48,6 +48,14 @@ def index():    # Function to handle requests to the index page
 @app.route('/delete/<int:id>')
 def delete(id):
     medToDelete = Medicine.query.get_or_404(id)
+    
+    try:
+        db.session.delete(medToDelete)
+        db.session.commit()
+        return redirect('/')
+    
+    except:
+        return 'There was a problem deleting your medications'
     
 
 
