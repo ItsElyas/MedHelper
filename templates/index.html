@@ -35,7 +35,8 @@
         <div class="yourMedicineList" id="medicineList">
             {% for med in medicines %}
                 <div class="medicineItem">
-                    <strong><h3>{{ med.name }}</h3></strong> <a href="/delete/{{med.id}}">Delete</a>
+                    <strong><h3>{{ med.name }}</h3></strong> <a href="/delete/{{med.id}}" alt="Delete">
+                    <img src="/static/icons/trash.svg" alt="Delete"></a>
                      <p>Dosage: {{ med.dosage }} mg</p>
                     
                 </div>
