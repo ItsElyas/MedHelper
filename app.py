@@ -1,17 +1,18 @@
-from flask import Flask, render_template, request, redirect
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, redirect # type: ignore
+from flask_sqlalchemy import SQLAlchemy # type: ignore
+from datetime import datetime
 app = Flask(__name__) # Create a Flask application
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///medicines.db' 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///medicines.db' # Tells app where the database is located
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # This suppresses a warning
 
 db = SQLAlchemy(app)    #initilizes the database
 
 class Medicine(db.Model):   #This creats a table called 'medicine
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True) # This is an int that references the ID each entry
     name = db.Column(db.String(100), nullable=False)
     dosage = db.Column(db.String(50), nullable=False)
-    time = db.Column(db.String(20), nullable=True)
+    time = db.Column(db.Datetime, default=datetime.now(datetime.timezone.utc), nullable=True)   #FIX
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
