@@ -39,6 +39,10 @@ def index():    # Function to handle requests to the index page
     meds = Medicine.query.all()
     return render_template('index.html',medicines=meds)
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    
+
 
 
 if __name__ == "__main__":
