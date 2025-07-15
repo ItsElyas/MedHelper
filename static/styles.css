@@ -80,6 +80,10 @@ body {
             justify-content: flex-start;
             align-items: stretch;
         }
+
+        /* #medName{
+            color: #000000;
+        } */
     
         #addMedicine {
             position:relative ;
