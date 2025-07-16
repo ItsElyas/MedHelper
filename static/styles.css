@@ -81,9 +81,9 @@ body {
             align-items: stretch;
         }
 
-        /* #medName{
+        .medName{
             color: #000000;
-        } */
+        }
     
         #addMedicine {
             position:relative ;
