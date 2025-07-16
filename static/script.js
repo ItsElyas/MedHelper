@@ -15,6 +15,16 @@ function showForm() {
 let medCount = 0;
 
 function cancelMedicine() {
+    const form1 = document.getElementById("MedicineDiv");
+    form1.style.display = "none";
+    document.getElementById("addMedicine").style.display = "block";
+
+    document.querySelectorAll("#yourMedicine #noMedicine").forEach(el => el.style.display = "block");
+    
+    const form2 = document.getElementById("medicineList");
+    if (form2) {
+        form2.style.display = "block";
+    }
 }
 
 // function submitMedicine() {
