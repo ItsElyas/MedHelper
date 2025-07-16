@@ -13,19 +13,20 @@
     <p class="center">Welcome to your personal Medicine Tracker!</p><br>
     
     <div class="dashboard">
+    <!--THIS WILL SHOW A PROGRESS BAR FOR MY MEDS -->
     <div class="todaysProgress">
         <h1>Today's Progress</h1>
         
         <p id="progress"></p>
     </div>
-        
+    <!--THIS WILL SHOW TODAYS MEDICINE AND WILL ONLY SHOW MEDS THAT I NEED TAKE NOT PASSED OR HAVE TAKEN-->
     <div class="dosesToday">
         <h1>Doses Today</h1>
         <p id="noMedicine">No dose's scheduled for today</p>
         <p id="dosePercentage"></p>
         </div>
     
-
+    <!--THIS IS WHERE I WILL CHECK OFF MY MEDS THAT I NEED TO TAKE-->
     <div class="todaysSchedule">
         <h1>Today's Schedule</h1>
         <!--MUST FIX THIS--> 
@@ -41,7 +42,7 @@
             {% endfor %}
         
     </div>
-    
+    <!--THIS IS TO SHOW ALL MY MEDS AND ALLOWS ME TO EITHER ADD DELETE OR CHANGE THEM-->
     <div id="yourMedicine">
         <h1>Your Medications</h1>
         <div class="yourMedicineList" id="medicineList">
