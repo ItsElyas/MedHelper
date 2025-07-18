@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect # type: ignore
 from flask_sqlalchemy import SQLAlchemy # type: ignore
-from datetime import datetime
+from datetime import datetime, time, timezone
 app = Flask(__name__) # Create a Flask application
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///medicines.db' # Tells app where the database is located
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # This suppresses a warning
@@ -12,7 +13,7 @@ class Medicine(db.Model):   #This creats a table called 'medicine
     id = db.Column(db.Integer, primary_key=True) # This is an int that references the ID each entry
     name = db.Column(db.String(100), nullable=False)
     dosage = db.Column(db.String(50), nullable=False)
-    # time = db.Column(db.Datetime, default=datetime.now(datetime.timezone.utc), nullable=True)   #FIX
+    time = db.Column(db.Time, nullable=True)   #FIX
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
@@ -23,15 +24,24 @@ def index():    # Function to handle requests to the index page
         #add medicine tags
         name = request.form['medicineName']
         dosage = request.form['medicineDose']
+        doseTime = request.form.get('timeToTake')
         
         if not name or not dosage:
             return redirect('/')
+        
+        medicine_time = None
+        if doseTime:
+            try:
+                medicine_time = datetime.strptime(doseTime, '%H:%M').time()
+            except:
+                print(f"Warning: Could not parse time ",{doseTime})
+
         
         exising_med = Medicine.query.filter_by(name = name).first()
         if exising_med:
             return redirect('/')
         
-        new_medicine = Medicine(name=name, dosage=dosage)
+        new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time)
         
         try:
             db.session.add(new_medicine)
