@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect # type: ignore
 from flask_sqlalchemy import SQLAlchemy # type: ignore
-from datetime import datetime, time, timezone
+from datetime import datetime
 app = Flask(__name__) # Create a Flask application
 
 
@@ -13,7 +13,7 @@ class Medicine(db.Model):   #This creats a table called 'medicine
     id = db.Column(db.Integer, primary_key=True) # This is an int that references the ID each entry
     name = db.Column(db.String(100), nullable=False)
     dosage = db.Column(db.String(50), nullable=False)
-    time = db.Column(db.Time, nullable=True)   #FIX
+    time = db.Column(db.Time, nullable=True)   #FIXED
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
@@ -53,7 +53,9 @@ def index():    # Function to handle requests to the index page
             
     else:
         meds = Medicine.query.all()
-        return render_template('index.html',medicines=meds)
+        # Need to understand this ASAP
+        sorted_meds = sorted(meds, key=lambda med: med.time if med.time is not None else datetime.min.time())
+        return render_template('index.html',medicines=meds,orderdMeds=sorted_meds)
 
 @app.route('/delete/<int:id>')
 def delete(id):
