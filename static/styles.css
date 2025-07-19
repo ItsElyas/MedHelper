@@ -57,7 +57,7 @@ body {
             padding-bottom: 8px;
         }
 
-        .todaysProgress, .todaysDoses, .todaysSchedule {
+        .todaysProgress, .todaysDoses{
             border-radius: 20px;
             /* max-height: 250px; */
             border-width: 5px;
@@ -162,13 +162,13 @@ body {
             color: #f7f7f7;
             transition: 0.3s;
         }
-
-        .yourMedicineList {
+        /* NEED TO FIX TODAYSCHED */
+        .yourMedicineList, .todaysSchedule {
             display: block;
             max-height: 350px;
             flex-direction: column;
             gap: 6px;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
         
         .medicine-item {
