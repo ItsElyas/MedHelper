@@ -54,6 +54,8 @@
                 <div class="medicineItem">
                     <strong><span class='medName'>{{ med.name }}</span></strong> <a href="/delete/{{med.id}}" alt="Delete">
                     <img src="/static/icons/trash.svg" alt="Delete"></a>
+                    <a href="/edit/{{med.id}}" alt="Edit">
+                    <img src="/static/icons/edit.svg" alt="Edit"></a>
                      <p>Dosage: {{ med.dosage }} mg</p>
                      <p>Time: {{ med.time.strftime('%I:%M %p') if med.time else 'N/A' }}</p>
                     
@@ -68,10 +70,10 @@
         <div id="MedicineDiv" style="display: none;">
             <form method="POST" class="medicineForm">
                 <label for="medicineName">Medicine Name:</label><br>
-                <input type="text" id="medicineName" name="medicineName" required><br>
+                <input type="text" id="medicineName" name="medicineName"  required><br>
 
                 <label for="medicineDose">Medicine Dose (mg):</label><br>
-                <input type="number" id="medicineDose" name="medicineDose"required><br>
+                <input type="number" id="medicineDose" name="medicineDose" required><br>
 
                 <label for="Notes">Notes (Optinal)</label><br>
                 <input type="text" id="Notes" name="Notes"><br>
@@ -85,7 +87,7 @@
                 </select><br>
 
                 <label for="timeForMedicine">Times to take:</label><br>
-                <input type="time" id="timeToTake" name="timeToTake"required><br>
+                <input type="time" id="timeToTake" name="timeToTake" required><br>
                 
             <div class='actionBtn'>
                 <input type="submit" value="Submit" id="submit" >

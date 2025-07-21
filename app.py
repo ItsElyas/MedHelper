@@ -69,7 +69,21 @@ def delete(id):
     except:
         return 'There was a problem deleting your medications'
     
-
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    medToChange = Medicine.query.get_or_404(id)
+    if request.method == 'POST': 
+        medToChange.name = request.form['medicineName']
+        medToChange.dosage = request.form['medicineDose']
+        medToChange.time = request.form['timeToTake']
+        
+        try:
+            db.session.commit()
+            return redirect('/')    
+            
+        except:
+            return 'There was a problem changing your medications'
+        
 
 
 if __name__ == "__main__":
