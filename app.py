@@ -37,9 +37,9 @@ def index():    # Function to handle requests to the index page
                 print(f"Warning: Could not parse time ",{doseTime})
 
         
-        exising_med = Medicine.query.filter_by(name = name).first()
-        if exising_med:
-            return redirect('/')
+        # exising_med = Medicine.query.filter_by(name = name).first()
+        # if exising_med:
+        #     return redirect('/')
         
         new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time)
         
@@ -83,6 +83,8 @@ def edit(id):
             
         except:
             return 'There was a problem changing your medications'
+    else:
+        return render_template('index.html',medicines=medToChange)
         
 
 
