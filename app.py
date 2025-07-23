@@ -14,6 +14,8 @@ class Medicine(db.Model):   #This creats a table called 'medicine
     name = db.Column(db.String(100), nullable=False)
     dosage = db.Column(db.String(50), nullable=False)
     time = db.Column(db.Time, nullable=True)   #FIXED
+    comments = db.Column(db.String(250), nullable=True)
+    taken = db.Column(db.Boolean, default=False)
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
@@ -25,6 +27,7 @@ def index():    # Function to handle requests to the index page
         name = request.form['medicineName']
         dosage = request.form['medicineDose']
         doseTime = request.form.get('timeToTake')
+        notes = request.form['Notes']
         
         if not name or not dosage:
             return redirect('/')
@@ -41,7 +44,8 @@ def index():    # Function to handle requests to the index page
         # if exising_med:
         #     return redirect('/')
         
-        new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time)
+        new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time, comments=notes)
+        
         
         try:
             db.session.add(new_medicine)
@@ -53,9 +57,11 @@ def index():    # Function to handle requests to the index page
             
     else:
         meds = Medicine.query.all()
+        totalMedications = Medicine.query.count()
+        notes = [med.comments for med in meds]
         # Need to understand this ASAP
         sorted_meds = sorted(meds, key=lambda med: med.time if med.time is not None else datetime.min.time())
-        return render_template('index.html',medicines=meds,orderdMeds=sorted_meds)
+        return render_template('index.html', medicines=meds, orderedMeds=sorted_meds, totalMeds=totalMedications, medNotes=notes)
 
 @app.route('/delete/<int:id>')
 def delete(id):

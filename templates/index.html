@@ -17,7 +17,7 @@
     <div class="todaysProgress">
         <h1>Today's Progress</h1>
         
-        <p id="progress"></p>
+        <p id="progress">{{ totalMeds }}</p>
     </div>
     <!--THIS WILL SHOW TODAYS MEDICINE AND WILL ONLY SHOW MEDS THAT I NEED TAKE NOT PASSED OR HAVE TAKEN-->
     <div class="dosesToday">
@@ -58,6 +58,9 @@
                     <img src="/static/icons/edit.svg" alt="Edit"></a>
                      <p>Dosage: {{ med.dosage }} mg</p>
                      <p>Time: {{ med.time.strftime('%I:%M %p') if med.time else 'N/A' }}</p>
+                    {%if med.comments%}
+                        <p>Notes: {{med.notes}}</p>
+                    {% endif %}
                     
                 </div>
             {% else %}
