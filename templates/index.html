@@ -33,7 +33,7 @@
         <div class="todaysSchedule">
         {% for med in orderedMeds %}
                 <div class="medicineItem">
-                    <input type="checkbox">
+                    <input type="checkbox" id="MedicineCheckBox" name="medicineCheck">
                     <strong><span class='medName'>{{ med.name }}</span></strong>
                      <p>Dosage: {{ med.dosage }} mg</p>
                      <p>Time: {{ med.time.strftime('%I:%M %p') if med.time else 'N/A' }}</p>
