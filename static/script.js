@@ -26,10 +26,32 @@ function cancelMedicine() {
         form2.style.display = "block";
     }
 }
+const progressDisplay = document.getElementById('progress');
+const totalMeds = parseInt(progressDisplay.dataset.totalMeds);   //SO COOL: parseInt makes it a int and  dataset grabs the stuff from flask i think
+const medicineCheckBox = document.querySelectorAll(".MedicineCheckBox");
 
-// function submitMedicine() {
-//     //Prevents page refreshing
-//     event.preventDefault();
+function updateProgress() {
+    let checkedCount = 0;
+    
+    medicineCheckBox.forEach(checkbox => {
+        if(checkbox.checked) {
+            checkedCount += 1;
+        }
+    });
+
+    let percentage = 0;
+    
+    if (totalMeds > 0)
+        percentage = (checkedCount / totalMeds) * 100;
+    progressDisplay.textContent = percentage.toFixed(0) + '%';
+}
+
+
+medicineCheckBox.forEach(checkbox => {
+    checkbox.addEventListener('change',updateProgress)
+});
+updateProgress();
+
 
 //     // Gets all the values of the inputs
 //     const name = document.getElementById("medicineName").value;

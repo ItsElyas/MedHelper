@@ -17,7 +17,7 @@
     <div class="todaysProgress">
         <h1>Today's Progress</h1>
         
-        <p id="progress">{{ totalMeds }}</p>
+        <p id="progress" data-total-meds="{{totalMeds}}"></p>
     </div>
     <!--THIS WILL SHOW TODAYS MEDICINE AND WILL ONLY SHOW MEDS THAT I NEED TAKE NOT PASSED OR HAVE TAKEN-->
     <div class="dosesToday">
@@ -33,7 +33,7 @@
         <div class="todaysSchedule">
         {% for med in orderedMeds %}
                 <div class="medicineItem">
-                    <input type="checkbox" id="MedicineCheckBox" name="medicineCheck">
+                    <input type="checkbox" class="MedicineCheckBox" name="medicineCheck">
                     <strong><span class='medName'>{{ med.name }}</span></strong>
                      <p>Dosage: {{ med.dosage }} mg</p>
                      <p>Time: {{ med.time.strftime('%I:%M %p') if med.time else 'N/A' }}</p>
