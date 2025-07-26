@@ -30,7 +30,7 @@
     <div class="todaysSchedule">
         <h1>Today's Schedule</h1>
         <!--MUST FIX THIS--> 
-        <div class="todaysSchedule">
+        <div class="scheduleCheckList">
         {% for med in orderedMeds %}
                 <div class="medicineItem">
                     <input type="checkbox" class="MedicineCheckBox" name="medicineCheck">
@@ -53,7 +53,7 @@
             {% for med in medicines %}
                 <div class="medicineItem">
                     <strong><span class='medName'>{{ med.name }}</span></strong> <a href="/delete/{{med.id}}" alt="Delete">
-                    <img src="/static/icons/trash.svg" alt="Delete"></a>
+                    <img src="/static/icons/trash.svg" alt="Delete" svg class='DeleteIcon'></a>
                     <a href="/edit/{{med.id}}" alt="Edit">
                     <img src="/static/icons/edit.svg" alt="Edit"></a>
                      <p>Dosage: {{ med.dosage }} mg</p>
