@@ -181,3 +181,46 @@
             column-gap: 8px;
         }
 
+       
+        .MedicineCheckBox {
+            appearance: none;
+            width: 21px;
+            height: 21px;
+            border: 1px solid #BBC1E1;
+            border-radius: 7px;
+            background: #fff;
+            cursor: pointer;
+            position: relative;
+            float: right;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .MedicineCheckBox:after {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 4px;
+            width: 5px;
+            height: 9px;
+            border: 2px solid #fff;
+            border-top: 0;
+            border-left: 0;
+            transform: rotate(43deg);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .MedicineCheckBox:checked {
+            background: #275EFE;
+            border-color: #275EFE;
+        }
+
+        .MedicineCheckBox:checked:after {
+            opacity: 1;
+        }
+
+        .MedicineCheckBox:hover {
+            border-color: #275EFE;
+        }
+    

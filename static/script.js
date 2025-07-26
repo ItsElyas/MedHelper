@@ -52,6 +52,40 @@ medicineCheckBox.forEach(checkbox => {
 });
 updateProgress();
 
+medicineCheckBox.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const medName = this.parentElement.querySelector('.medName');
+        const medDose = this.parentElement.querySelector('.medDose');
+        const medTime = this.parentElement.querySelector('.medTime');
+        
+        if (this.checked) {
+            medName.style.textDecoration = 'line-through';
+            medName.style.color = '#48bb78';
+            medName.style.opacity = '0.7';
+
+            medDose.style.textDecoration = 'line-through';
+            medDose.style.color = '#48bb78';
+            medDose.style.opacity = '0.7';
+
+            medTime.style.textDecoration = 'line-through';
+            medTime.style.color = '#48bb78';
+            medTime.style.opacity = '0.7';
+        } else {
+            medName.style.textDecoration = 'none';
+            medName.style.color = '#000000';
+            medName.style.opacity = '1';
+
+            medDose.style.textDecoration = 'none';
+            medDose.style.color = '#000000';
+            medDose.style.opacity = '1';
+
+            medTime.style.textDecoration = 'none';
+            medTime.style.color = '#000000';
+            medTime.style.opacity = '1';
+        }
+    });
+});
+
 
 //     // Gets all the values of the inputs
 //     const name = document.getElementById("medicineName").value;
