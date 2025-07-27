@@ -57,23 +57,10 @@ medicineCheckBox.forEach(checkbox => {
         const medName = this.parentElement.querySelector('.medName');
         const medDose = this.parentElement.querySelector('.medDose');
         const medTime = this.parentElement.querySelector('.medTime');
-        const isMissed =this.parentElement.classList.contains("missed");
-        
-        if (this.checked) {
-            medName.style.textDecoration = 'line-through';
-            medName.style.color = '#48bb78';
-            medName.style.opacity = '0.7';
+        const isMissed =this.parentElement.classList.contains("missed"); 
+        const medId = parseInt(this.parentElement.id.replace('med-', ''));
 
-            medDose.style.textDecoration = 'line-through';
-            medDose.style.color = '#48bb78';
-            medDose.style.opacity = '0.7';
-
-            medTime.style.textDecoration = 'line-through';
-            medTime.style.color = '#48bb78';
-            medTime.style.opacity = '0.7';
-        }
-        //NOT WORKING
-        else if (isMissed) {
+        if (isMissed) {
             medName.style.textDecoration = 'none';
             medName.style.color = '#a10000';   // dark red
             medName.style.opacity = '1';
@@ -89,6 +76,21 @@ medicineCheckBox.forEach(checkbox => {
             medTime.style.opacity = '1';
             medTime.style.fontWeight = 'bold';
         }
+       else if (this.checked) {
+            medName.style.textDecoration = 'line-through';
+            medName.style.color = '#48bb78';
+            medName.style.opacity = '0.7';
+
+            medDose.style.textDecoration = 'line-through';
+            medDose.style.color = '#48bb78';
+            medDose.style.opacity = '0.7';
+
+            medTime.style.textDecoration = 'line-through';
+            medTime.style.color = '#48bb78';
+            medTime.style.opacity = '0.7';
+        }
+        //NOT WORKING
+        
          else {
             medName.style.textDecoration = 'none';
             medName.style.color = '#000000';
@@ -102,8 +104,21 @@ medicineCheckBox.forEach(checkbox => {
             medTime.style.color = '#000000';
             medTime.style.opacity = '1';
         }
-    });
+        fetch(`/update_taken/${medId}`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({taken: this.checked})
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (!data.success) {
+        console.error('Failed to update taken status:', data.error);
+      }
+    })
+    .catch(err => console.error('Error sending taken status:', err));
+  });
 });
+
 
 function updateMedClasses () {
     fetch('/checkMedications')  //Makes a GET request to the backend
