@@ -216,8 +216,8 @@
         }
 
         .MedicineCheckBox:checked {
-            background: #275EFE;
-            border-color: #275EFE;
+            background: #48bb78;
+            border-color: #48bb78;
         }
 
         .MedicineCheckBox:checked:after {
@@ -225,7 +225,7 @@
         }
 
         .MedicineCheckBox:hover {
-            border-color: #275EFE;
+            border-color: #48bb78;
         }
     
         
