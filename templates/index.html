@@ -32,7 +32,7 @@
         <!--MUST FIX THIS--> 
         <div class="scheduleCheckList">
         {% for med in orderedMeds %}
-                <div class="medicineItem">
+                <div class="medicineCheckList">
                     <input type="checkbox" class="MedicineCheckBox" name="medicineCheck">
                     <strong><span class='medName'>{{ med.name }}</span></strong>
                      <p class='medDose'>Dosage: {{ med.dosage }} mg</p>
@@ -52,15 +52,22 @@
         <div class="yourMedicineList" id="medicineList">
             {% for med in medicines %}
                 <div class="medicineItem">
-                    <strong><span class='medName'>{{ med.name }}</span></strong> <a href="/delete/{{med.id}}" alt="Delete">
-                    <img src="/static/icons/trash.svg" alt="Delete" svg class='DeleteIcon'></a>
-                    <a href="/edit/{{med.id}}" alt="Edit">
-                    <img src="/static/icons/edit.svg" alt="Edit"></a>
-                     <p>Dosage: {{ med.dosage }} mg</p>
-                     <p>Time: {{ med.time.strftime('%I:%M %p') if med.time else 'N/A' }}</p>
-                    {%if med.comments%}
-                        <p>Notes: {{med.notes}}</p>
-                    {% endif %}
+                    <strong><span class='medName'>{{ med.name }}</span></strong>
+                    <div class="iconActions">
+                        <a href="/delete/{{med.id}}" alt="Delete">
+                            <i class="fa-solid fa-trash-can"></i></a>
+                    
+                        <a href="/edit/{{med.id}}" alt="Edit"> 
+                            <i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+
+                    <div class="medicineInfo">
+                        <p>Dosage: {{ med.dosage }} mg</p>
+                        <p>Time: {{ med.time.strftime('%I:%M %p') if med.time else 'N/A' }}</p>
+                        {%if med.comments%}
+                            <p>Notes: {{med.notes}}</p>
+                        {% endif %}
+                    </div>
                     
                 </div>
             {% else %}
@@ -102,5 +109,6 @@
     </div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://kit.fontawesome.com/3c0d530cd7.js" crossorigin="anonymous"></script>
 </body>
 </html>

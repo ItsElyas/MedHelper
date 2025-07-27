@@ -228,3 +228,51 @@
             border-color: #275EFE;
         }
     
+        
+       .medicineItem {
+            /* Remove display: flex; flex-direction: column; */
+            overflow: hidden; /* This clears the floated elements */
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        .medName {
+            float: left;
+            margin-bottom: 5px;
+        }
+
+        .iconActions {
+            float: right;
+            margin: 5px 0;
+        }
+
+        .medicineInfo {
+            clear: both; /* This makes it go below both floated elements */
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .medicineInfo p {
+            margin: 2px 0;
+            text-align: left;
+        }
+
+        .fa-trash-can {
+            color: #ff4444;
+        }
+
+        .fa-trash-can:hover {
+            color: #cc0000;
+        }
+
+        .fa-pen-to-square {
+            color: #28a745;
+        }
+
+        .fa-pen-to-square:hover {
+            color: #1e7e34;
+        }
+
+        .medicineInfo {
+            float: left;
+        }
