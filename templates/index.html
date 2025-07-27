@@ -33,6 +33,7 @@
         <div class="scheduleCheckList">
         {% for med in orderedMeds %}
                 <div class="medicineCheckList">
+                    <!--ADD AN IF STATMENT TO ADD A ! IF THE TIME HAS PASSED-->
                     <input type="checkbox" class="MedicineCheckBox" name="medicineCheck">
                     <strong><span class='medName'>{{ med.name }}</span></strong><br>
                      <p class='medDose'>Dosage: {{ med.dosage }} mg</p>

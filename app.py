@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect # type: ignore
+from flask import Flask, render_template, request, redirect, jsonify # type: ignore
 from flask_sqlalchemy import SQLAlchemy # type: ignore
 from datetime import datetime
 app = Flask(__name__) # Create a Flask application
@@ -90,8 +90,26 @@ def edit(id):
         except:
             return 'There was a problem changing your medications'
     else:
-        return render_template('index.html',medicines=medToChange)
-        
+        return render_template('index.html',medicines=medToChange) 
+    
+@app.route('/checkMedications')
+def checkMedications():
+    currentTime = datetime.now().time()
+    medicines = Medicine.query.all()
+    
+    overdueMeds = []
+    upcomingMeds = []
+    
+    for med in medicines:
+        if med.time and not med.taken:
+            if med.time <= currentTime:
+                overdueMeds.append({
+                    'id': med.id,
+                    'name':med.name,
+                    'time': med.time.strftime('%I:%M %p'),
+                    'dosage': med.dosage
+                })
+            
 
 
 if __name__ == "__main__":
