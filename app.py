@@ -99,11 +99,20 @@ def checkMedications():
     medicines = Medicine.query.all()
     
     overdueMeds = []
-    upcomingMeds = []
+    takenMeds = []
     
     for med in medicines:
-        if med.time and not med.taken:
-            if med.time < currentTime:
+        if med.taken:
+            med.taken = True
+            takenMeds.append({
+                    'id': med.id,
+                    'name':med.name,
+                    'time': med.time.strftime('%I:%M %p'),
+                    'dosage': med.dosage
+               })
+            
+        elif med.time and not med.taken:
+            if med.time < currentTime and not med.taken:
                 med.missed = True
                 overdueMeds.append({
                     'id': med.id,
@@ -115,7 +124,7 @@ def checkMedications():
                 # med.taken = True
                 med.missed = False
     db.session.commit()
-    return jsonify({'missed': overdueMeds})
+    return jsonify({'missed': overdueMeds, 'taken':takenMeds})
 
 
 if __name__ == "__main__":

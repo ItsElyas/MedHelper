@@ -105,14 +105,15 @@ medicineCheckBox.forEach(checkbox => {
     });
 });
 
-function checkMissedMeds () {
+function updateMedClasses () {
     fetch('/checkMedications')  //Makes a GET request to the backend
     .then(response => response.json()) //Convers the response to a json
     .then(data => {
         const missedMeds = data.missed.map(med => med.id); //Grabs the list of missed meds we made
+        const takenMeds = data.taken.map(med => med.id); //Grabs the list of taken meds we made
 
         document.querySelectorAll('.medicineCheckList').forEach(div => {
-            const id = parseInt(div.id.replace("med",""));
+            const id = parseInt(div.id.replace("med-",""));
 
             if(missedMeds.includes(id)) {
                 div.classList.add("missed");
@@ -120,12 +121,20 @@ function checkMissedMeds () {
             else {
                 div.classList.remove("missed");
             } 
+             if(takenMeds.includes(id)) {
+                div.classList.add("taken");
+            }
+            else {
+                div.classList.remove("taken");
+            } 
         });
     });
 }
 
-window.onload = checkMissedMeds;
-setInterval(checkMissedMeds, 30000)
+
+
+window.onload = updateMedClasses;
+setInterval(updateMedClasses, 30000)
 
 //     // Gets all the values of the inputs
 //     const name = document.getElementById("medicineName").value;
