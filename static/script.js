@@ -86,6 +86,30 @@ medicineCheckBox.forEach(checkbox => {
     });
 });
 
+function checkMissedMeds () {
+    fetch('/checkMedications')  //Makes a GET request to the backend
+    .then(response => response.json()) //Convers the response to a json
+    .then(data => {
+        const missedMeds = data.missed.map(med => med.id); //Grabs the list of missed meds we made
+
+        document.querySelectorAll('.medicineCheckList').forEach(div => {
+            const id = parseInt(div.id.replace("med",""));
+
+            if(missedMeds.includes(id)) {
+                div.classList.add("missed");
+                innerHTML.replace(/<span[^>]*>❗️<\/span>/, '');
+
+
+            }
+            else {
+                div.classList.remove("missed");
+            } 
+        });
+    });
+}
+
+window.onload = checkMissedMeds;
+setInterval(checkMissedMeds, 30000)
 
 //     // Gets all the values of the inputs
 //     const name = document.getElementById("medicineName").value;

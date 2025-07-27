@@ -32,12 +32,16 @@
         <!--MUST FIX THIS--> 
         <div class="scheduleCheckList">
         {% for med in orderedMeds %}
-                <div class="medicineCheckList">
+                <div class="medicineCheckList {% if med.missed %}missed{% endif %} " id="med-{{ med.id }}"> <!--This is giving each med a uniqe id and a class called "missed if its missed"-->
                     <!--ADD AN IF STATMENT TO ADD A ! IF THE TIME HAS PASSED-->
                     <input type="checkbox" class="MedicineCheckBox" name="medicineCheck">
                     <strong><span class='medName'>{{ med.name }}</span></strong><br>
                      <p class='medDose'>Dosage: {{ med.dosage }} mg</p>
                      <p class='medTime'>Time: {{ med.time.strftime('%I:%M %p') if med.time else 'N/A' }}</p>
+
+                    {% if med.missed %}
+                        <span style='color: red'>!</span>
+                    {% endif %}
                     
                 </div>
             {% else %}

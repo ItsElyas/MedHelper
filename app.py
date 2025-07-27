@@ -114,6 +114,8 @@ def checkMedications():
             else:
                 # med.taken = True
                 med.missed = False
+    db.session.commit()
+    return jsonify({'missed': overdueMeds})
 
 
 if __name__ == "__main__":
