@@ -93,11 +93,13 @@ def edit(id):
     else:
         return render_template('index.html',medicines=medToChange) 
     
-@app.route('/checkMedications')
-def checkMedications():
+    
+ #NEEDS TO BE FIXED I CANT TELL IF IT WORKS 
+@app.route('/checkMedications/<int:id>', methods=['POST'])
+def checkMedications(id):
     currentTime = datetime.now().time()
     medicines = Medicine.query.all()
-    
+    med = Medicine.query.get_or_404(id)
     overdueMeds = []
     takenMeds = []
     
