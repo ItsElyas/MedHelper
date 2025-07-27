@@ -34,7 +34,7 @@
         {% for med in orderedMeds %}
                 <div class="medicineCheckList">
                     <input type="checkbox" class="MedicineCheckBox" name="medicineCheck">
-                    <strong><span class='medName'>{{ med.name }}</span></strong>
+                    <strong><span class='medName'>{{ med.name }}</span></strong><br>
                      <p class='medDose'>Dosage: {{ med.dosage }} mg</p>
                      <p class='medTime'>Time: {{ med.time.strftime('%I:%M %p') if med.time else 'N/A' }}</p>
                     
