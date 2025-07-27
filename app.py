@@ -16,6 +16,7 @@ class Medicine(db.Model):   #This creats a table called 'medicine
     time = db.Column(db.Time, nullable=True)   #FIXED
     comments = db.Column(db.String(250), nullable=True)
     taken = db.Column(db.Boolean, default=False)
+    missed = db.Column(db.Boolean, default=False)
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
@@ -81,7 +82,7 @@ def edit(id):
     if request.method == 'POST': 
         medToChange.name = request.form['medicineName']
         medToChange.dosage = request.form['medicineDose']
-        medToChange.time = request.form['timeToTake']
+        medToChange.time = request.form.get('timeToTake')
         
         try:
             db.session.commit()
@@ -102,14 +103,17 @@ def checkMedications():
     
     for med in medicines:
         if med.time and not med.taken:
-            if med.time <= currentTime:
+            if med.time < currentTime:
+                med.missed = True
                 overdueMeds.append({
                     'id': med.id,
                     'name':med.name,
                     'time': med.time.strftime('%I:%M %p'),
                     'dosage': med.dosage
-                })
-            
+               })
+            else:
+                # med.taken = True
+                med.missed = False
 
 
 if __name__ == "__main__":
