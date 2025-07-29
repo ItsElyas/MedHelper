@@ -29,6 +29,7 @@ function cancelMedicine() {
 const progressDisplay = document.getElementById('progress');
 const totalMeds = parseInt(progressDisplay.dataset.totalMeds);   //SO COOL: parseInt makes it a int and  dataset grabs the stuff from flask i think
 const medicineCheckBox = document.querySelectorAll(".MedicineCheckBox");
+const progressBar = document.getElementById('progressInnerBar');
 
 function updateProgress() {
     let checkedCount = 0;
@@ -43,6 +44,7 @@ function updateProgress() {
     
     if (totalMeds > 0)
         percentage = (checkedCount / totalMeds) * 100;
+    progressBar.style.width = percentage + '%';
     progressDisplay.textContent = percentage.toFixed(0) + '%';
 }
 

@@ -7,12 +7,22 @@
         }
 
         h1 {
+            text-align: center;
             color: white;
             font-size: 2.5rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);        }
         p {
             color: #012c36;
+        }
+
+        #progress {
+            text-align: center;
+            color: linear-gradient(135deg, #1e2f7a 0%, #764ba2 100%);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+
         }
 
 
@@ -64,6 +74,22 @@
             box-shadow: 0 5px 12px #12343b;
             color: white;
         } 
+
+        #progressBar {
+            align-items: center;
+            width: 550px;
+            height: 30px;
+            background-color: #dad8d8;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        #progressInnerBar {
+            width: 0px;
+            height: 30px;
+            background-color: #48bb78;
+            transition: width 0.8s ease-in-out;
+        }
 
 
         #Schedule, #noMedicine {
