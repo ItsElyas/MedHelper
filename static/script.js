@@ -111,31 +111,45 @@ medicineCheckBox.forEach(checkbox => {
   });
 
 //NEEDS TO BE FIXED I CANT TELL IF IT WORKS
+// ok so i think i make it grab the json file i save in app.py and then check if that specifit thing aka taken is true if so i make checked = TRUE
 function updateMedClasses () {
-    fetch('/checkMedications')  //Makes a GET request to the backend
-    .then(response => response.json()) //Convers the response to a json
+    fetch ('/checkMedications/0', {
+        method: 'POST',
+        body: new FormData(document.querySelector('form'))
+    })
+    .then(response => response.json())
     .then(data => {
-        const missedMeds = data.missed.map(med => med.id); //Grabs the list of missed meds we made
-        const takenMeds = data.taken.map(med => med.id); //Grabs the list of taken meds we made
-
-        document.querySelectorAll('.medicineCheckList').forEach(div => {
-            const id = parseInt(div.id.replace("med-",""));
-
-            if(missedMeds.includes(id)) {
-                div.classList.add("missed");
-            }
-            else {
-                div.classList.remove("missed");
-            } 
-             if(takenMeds.includes(id)) {
-                div.classList.add("taken");
-            }
-            else {
-                div.classList.remove("taken");
-            } 
-        });
-    });
+        const missedMeds = data.missed.map(med => med.id);
+        const takenMeds = data.taken.map(med => med.id);
+        
+    }
+    )
 }
+//     fetch('/checkMedications/0')  //Makes a GET request to the backend
+//     .then(response => response.json()) //Convers the response to a json
+//     .then(data => {
+//         const missedMeds = data.missed.map(med => med.id); //Grabs the list of missed meds we made
+//         const takenMeds = data.taken.map(med => med.id); //Grabs the list of taken meds we made
+
+//         document.querySelectorAll('.medicineCheckList').forEach(div => {
+//             const id = parseInt(div.id.replace("med-",""));
+
+//             if(missedMeds.includes(id)) {
+//                 div.classList.add("missed");
+//             }
+//             else {
+//                 div.classList.remove("missed");
+//             } 
+//              if(takenMeds.includes(id)) {
+//                 div.classList.add("taken");
+
+//             }
+//             else {
+//                 div.classList.remove("taken");
+//             } 
+//         });
+//     });
+// }
 
 
 

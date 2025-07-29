@@ -103,28 +103,34 @@ def checkMedications(id):
     overdueMeds = []
     takenMeds = []
     
+    checkedIds = request.form.getlist('medicineCheck') #Makes a list of strings for the form that got submitted
+    checkedIds = list(map(int, checkedIds)) #Then converts them to ints
+    
     for med in medicines:
-        if med.taken:
+        if med.id in checkedIds:
             med.taken = True
             takenMeds.append({
                     'id': med.id,
                     'name':med.name,
                     'time': med.time.strftime('%I:%M %p'),
-                    'dosage': med.dosage
-               })
+                    'dosage': med.dosage,
+                    'taken' :med.taken,
+            })
+        else:
+            med.taken = False    
             
-        elif med.time and not med.taken:
-            if med.time < currentTime and not med.taken:
-                med.missed = True
-                overdueMeds.append({
-                    'id': med.id,
-                    'name':med.name,
-                    'time': med.time.strftime('%I:%M %p'),
-                    'dosage': med.dosage
-               })
-            else:
-                # med.taken = True
-                med.missed = False
+        if med.time and med.time < currentTime:
+            med.missed = True
+            overdueMeds.append({
+                'id': med.id,
+                'name':med.name,
+                'time': med.time.strftime('%I:%M %p'),
+                'dosage': med.dosage,
+                'missed' : med.missed
+            })
+        else:
+            med.missed = False
+
     db.session.commit()
     return jsonify({'missed': overdueMeds, 'taken':takenMeds})
 
