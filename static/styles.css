@@ -18,8 +18,8 @@
 
         #progress {
             text-align: center;
-            color: linear-gradient(135deg, #1e2f7a 0%, #764ba2 100%);
-            font-size: 1.5rem;
+            color: rgb(88, 233, 88);
+            font-size: 1rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 
@@ -87,8 +87,8 @@
         #progressInnerBar {
             width: 0px;
             height: 30px;
-            background-color: #48bb78;
-            transition: width 0.8s ease-in-out;
+            background-color: #28a745;
+            transition: background-color 0.5s ease-in-out, width 0.8s ease-in-out;
         }
 
 
@@ -112,6 +112,7 @@
         }
     
         #addMedicine {
+            
             position:relative ;
             display: center;
             align-items: center;

@@ -30,6 +30,7 @@ const progressDisplay = document.getElementById('progress');
 const totalMeds = parseInt(progressDisplay.dataset.totalMeds);   //SO COOL: parseInt makes it a int and  dataset grabs the stuff from flask i think
 const medicineCheckBox = document.querySelectorAll(".MedicineCheckBox");
 const progressBar = document.getElementById('progressInnerBar');
+const progressNumber = document.getElementById('progress');
 
 function updateProgress() {
     let checkedCount = 0;
@@ -42,10 +43,37 @@ function updateProgress() {
 
     let percentage = 0;
     
-    if (totalMeds > 0)
+    if (totalMeds > 0){
         percentage = (checkedCount / totalMeds) * 100;
+
+        if (percentage > 89){
+            progressBar.style.backgroundColor= '#009c15ff';
+            progress.style.color = '#009c15ff';
+        }
+
+        else if (percentage < 90 && percentage >= 80){
+            progressBar.style.backgroundColor= '#94ec06ff';
+            progress.style.color = '#94ec06ff';
+        }
+
+        else if (percentage < 80 && percentage >= 70){
+            progressBar.style.backgroundColor= '#f9fc44ff';
+            progress.style.color = '#f9fc44ff';
+        }
+
+        else if (percentage < 70 && percentage >= 60){
+            progressBar.style.backgroundColor= '#f7b526ff';
+            progress.style.color = '#f7b526ff';
+        }
+
+        else if (percentage < 60){
+            progressBar.style.backgroundColor= '#f5150eff';
+            progress.style.color = '#f5150eff';
+        }
+
     progressBar.style.width = percentage + '%';
     progressDisplay.textContent = percentage.toFixed(0) + '%';
+    }
 }
 
 
@@ -62,6 +90,13 @@ medicineCheckBox.forEach(checkbox => {
         const isMissed =this.parentElement.classList.contains("missed"); 
         const medId = parseInt(this.parentElement.id.replace('med-', ''));
 
+        const timeNow = new Date();
+        const currentHour = timeNow.getHours();
+        const currentMinute = timeNow.getMinutes();
+        const currentTimeInMinutes = currentHour * 60 + currentMinute;
+        
+        
+
 
         if (this.checked) {
             medName.style.textDecoration = 'line-through';
@@ -76,9 +111,8 @@ medicineCheckBox.forEach(checkbox => {
             medTime.style.color = '#48bb78';
             medTime.style.opacity = '0.7';
         }
-
         //NOT WORKING
-        else if (isMissed) {
+        else if (medTimeValue < currentTime) {
             medName.style.textDecoration = 'none';
             medName.style.color = '#a10000';   // dark red
             medName.style.opacity = '1';
