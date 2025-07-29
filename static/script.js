@@ -105,56 +105,56 @@ medicineCheckBox.forEach(checkbox => {
             medTime.style.color = '#000000';
             medTime.style.opacity = '1';
         }
-       
-    
-    })
-  });
+        updateMedClasses(); // ✅ Trigger backend update when a checkbox changes
+    });
+});
+
+
 
 //NEEDS TO BE FIXED I CANT TELL IF IT WORKS
 // ok so i think i make it grab the json file i save in app.py and then check if that specifit thing aka taken is true if so i make checked = TRUE
 function updateMedClasses () {
     fetch ('/checkMedications/0', {
         method: 'POST',
-        body: new FormData(document.querySelector('form'))
+        body: new FormData(document.getElementById('medForm'))
+
     })
     .then(response => response.json())
     .then(data => {
         const missedMeds = data.missed.map(med => med.id);
         const takenMeds = data.taken.map(med => med.id);
-        
-    }
-    )
-}
-//     fetch('/checkMedications/0')  //Makes a GET request to the backend
-//     .then(response => response.json()) //Convers the response to a json
-//     .then(data => {
-//         const missedMeds = data.missed.map(med => med.id); //Grabs the list of missed meds we made
-//         const takenMeds = data.taken.map(med => med.id); //Grabs the list of taken meds we made
+       
+        document.querySelectorAll('.medicineCheckList').forEach(div => {
+            const id = parseInt(div.id.replace("med-",""));
 
-//         document.querySelectorAll('.medicineCheckList').forEach(div => {
-//             const id = parseInt(div.id.replace("med-",""));
-
-//             if(missedMeds.includes(id)) {
-//                 div.classList.add("missed");
-//             }
-//             else {
-//                 div.classList.remove("missed");
-//             } 
-//              if(takenMeds.includes(id)) {
-//                 div.classList.add("taken");
-
-//             }
-//             else {
-//                 div.classList.remove("taken");
-//             } 
-//         });
-//     });
-// }
-
-
-
-window.onload = updateMedClasses;
-setInterval(updateMedClasses, 30000)
+            if(missedMeds.includes(id)) {
+                div.classList.add("missed");
+            }
+            else {
+                div.classList.remove("missed");
+            } 
+            if(takenMeds.includes(id)) {
+                div.classList.add("taken");
+            }
+            else {
+                div.classList.remove("taken");
+            } 
+        });
+        document.querySelectorAll('.MedicineCheckBox').forEach(checkbox => {
+                    const id = parseInt(checkbox.value); // Get med ID from value
+                    if (takenMeds.includes(id)) {
+                        checkbox.checked = true;
+                    } else {
+                        checkbox.checked = false;
+                    }
+                });
+            });
+        }
+window.onload = () => {
+    updateProgress();
+    updateMedClasses();
+};
+setInterval(updateMedClasses, 1000)
 
 //     // Gets all the values of the inputs
 //     const name = document.getElementById("medicineName").value;

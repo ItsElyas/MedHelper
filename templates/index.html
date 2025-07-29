@@ -31,7 +31,7 @@
         <h1>Today's Schedule</h1>
         <!--MUST FIX THIS--> 
         <div class="scheduleCheckList">
-        <form method="POST" action="/checkMedications/{{ med.id }}">
+        <form id="medForm" method="POST" action="/checkMedications/0">
             {% for med in orderedMeds %}
                     <div class="medicineCheckList {% if med.missed %}missed{% endif %} " id="med-{{ med.id }}"> <!--This is giving each med a uniqe id and a class called "missed if its missed"-->
                         <!--ADD AN IF STATMENT TO ADD A ! IF THE TIME HAS PASSED-->
@@ -48,7 +48,7 @@
                 {% else %}
                     <p id="Schedule">No medications scheduled for today</p>
                 {% endfor %}
-                </form>
+        </form>
         </div>
         
     </div>
