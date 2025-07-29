@@ -57,8 +57,8 @@ function updateProgress() {
         }
 
         else if (percentage < 80 && percentage >= 70){
-            progressBar.style.backgroundColor= '#f9fc44ff';
-            progress.style.color = '#f9fc44ff';
+            progressBar.style.backgroundColor= '#acf855ff';
+            progress.style.color = '#acf855ff';
         }
 
         else if (percentage < 70 && percentage >= 60){
@@ -112,7 +112,7 @@ medicineCheckBox.forEach(checkbox => {
             medTime.style.opacity = '0.7';
         }
         //NOT WORKING
-        else if (medTimeValue < currentTime) {
+        else if (medTime < currentTimeInMinutes) {
             medName.style.textDecoration = 'none';
             medName.style.color = '#a10000';   // dark red
             medName.style.opacity = '1';
