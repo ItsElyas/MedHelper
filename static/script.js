@@ -154,7 +154,7 @@ window.onload = () => {
     updateProgress();
     updateMedClasses();
 };
-setInterval(updateMedClasses, 1000)
+setInterval(updateMedClasses, 60000)
 
 //     // Gets all the values of the inputs
 //     const name = document.getElementById("medicineName").value;
