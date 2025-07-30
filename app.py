@@ -94,7 +94,7 @@ def edit(id):
         return render_template('index.html',medicines=medToChange) 
     
     
- #NEEDS TO BE FIXED I CANT TELL IF IT WORKS 
+ #NEEDS TO BE FIXED IT GETS 404
 @app.route('/checkMedications/<int:id>', methods=['POST'])
 def checkMedications(id):
     currentTime = datetime.now().time()

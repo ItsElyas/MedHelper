@@ -95,13 +95,12 @@ medicineCheckBox.forEach(checkbox => {
         const currentMinute = timeNow.getMinutes();
         const currentTimeInMinutes = currentHour * 60 + currentMinute;
         
-        
-
 
         if (this.checked) {
             medName.style.textDecoration = 'line-through';
             medName.style.color = '#48bb78';
             medName.style.opacity = '0.7';
+            medId.taken = true;
 
             medDose.style.textDecoration = 'line-through';
             medDose.style.color = '#48bb78';
