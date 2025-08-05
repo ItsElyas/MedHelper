@@ -32,43 +32,6 @@ const medicineCheckBox = document.querySelectorAll(".MedicineCheckBox");
 const progressBar = document.getElementById('progressInnerBar');
 const progressNumber = document.getElementById('progress');
 
-function updateColor() {
-    const medName = this.parentElement.querySelector('.medName');
-        const medDose = this.parentElement.querySelector('.medDose');
-        const medTime = this.parentElement.querySelector('.medTime');
-        const isMissed =this.parentElement.classList.contains("missed"); 
-        const medId = parseInt(this.parentElement.id.replace('med-', ''));
-
-        const timeNow = new Date();
-        console.log(timeNow)
-        const currentHour = timeNow.getHours();
-        const currentMinute = timeNow.getMinutes();
-        const currentTimeInMinutes = currentHour * 60 + currentMinute;
-        
-        const medTimeHour = medTime.getHours();
-        const medTimeMinute = medTime.getMinutes();
-        const medTimeInMinutes = medTimeHour * 60 + medTimeMinute;
-        console.log(currentHour);
-        console.log(medTime);
-
-        if (medTimeInMinutes < currentTimeInMinutes) {
-            medName.style.textDecoration = 'none';
-            medName.style.color = '#a10000';   // dark red
-            medName.style.opacity = '1';
-            medName.style.fontWeight = 'bold';
-
-            medDose.style.textDecoration = 'none';
-            medDose.style.color = '#a10000';
-            medDose.style.opacity = '1';
-            medDose.style.fontWeight = 'bold';
-
-            medTime.style.textDecoration = 'none';
-            medTime.style.color = '#a10000';
-            medTime.style.opacity = '1';
-            medTime.style.fontWeight = 'bold';
-        }
-}
-
 function updateProgress() {
     let checkedCount = 0;
     
@@ -128,16 +91,13 @@ medicineCheckBox.forEach(checkbox => {
         const medId = parseInt(this.parentElement.id.replace('med-', ''));
 
         const timeNow = new Date();
-        console.log(timeNow)
-        const currentHour = timeNow.getHours();
-        const currentMinute = timeNow.getMinutes();
-        const currentTimeInMinutes = currentHour * 60 + currentMinute;
+  
         
-        const medTimeHour = medTime.getHours();
-        const medTimeMinute = medTime.getMinutes();
-        const medTimeInMinutes = medTimeHour * 60 + medTimeMinute;
-        console.log(currentHour);
-        console.log(medTime);
+        // const medTimeHour = medTime.getHours();
+        // const medTimeMinute = medTime.getMinutes();
+        // const medTimeInMinutes = medTimeHour * 60 + medTimeMinute;
+        // console.log(currentHour);
+        // console.log(medTime);
         
 
         if (this.checked) {
@@ -155,7 +115,7 @@ medicineCheckBox.forEach(checkbox => {
             medTime.style.opacity = '0.7';
         }
         //NOT WORKING
-        else if (medTimeInMinutes < currentTimeInMinutes) {
+        else if (medTime < timeNow) {
             medName.style.textDecoration = 'none';
             medName.style.color = '#a10000';   // dark red
             medName.style.opacity = '1';

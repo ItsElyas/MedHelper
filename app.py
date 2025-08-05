@@ -13,7 +13,7 @@ class Medicine(db.Model):   #This creats a table called 'medicine
     id = db.Column(db.Integer, primary_key=True) # This is an int that references the ID each entry
     name = db.Column(db.String(100), nullable=False)
     dosage = db.Column(db.String(50), nullable=False)
-    time = db.Column(db.Time, nullable=True)   #FIXED
+    time = db.Column(db.Time, nullable=False)   #FIXED
     comments = db.Column(db.String(250), nullable=True)
     taken = db.Column(db.Boolean, default=False)
     missed = db.Column(db.Boolean, default=False)
@@ -23,6 +23,8 @@ class Medicine(db.Model):   #This creats a table called 'medicine
 
 @app.route('/', methods=['POST', 'GET']) # Defines the route for the index page
 def index():    # Function to handle requests to the index page
+    medicine_time = None
+    current_time = datetime.now().time
     if request.method == 'POST':
         #add medicine tags
         name = request.form['medicineName']
@@ -33,14 +35,9 @@ def index():    # Function to handle requests to the index page
         if not name or not dosage:
             return redirect('/')
         
-        medicine_time = None
-        if doseTime:
-            try:
-                medicine_time = datetime.strptime(doseTime, '%H:%M').time()
-            except:
-                print(f"Warning: Could not parse time ",{doseTime})
-
-        
+       
+            
+        medicine_time = datetime.strptime(doseTime, '%H:%M').time()
         # exising_med = Medicine.query.filter_by(name = name).first()
         # if exising_med:
         #     return redirect('/')
@@ -62,7 +59,8 @@ def index():    # Function to handle requests to the index page
         notes = [med.comments for med in meds]
         # Need to understand this ASAP
         sorted_meds = sorted(meds, key=lambda med: med.time if med.time is not None else datetime.min.time())
-        return render_template('index.html', medicines=meds, orderedMeds=sorted_meds, totalMeds=totalMedications, medNotes=notes)
+        upcoming_medsToday =[]
+        return render_template('index.html', medicines=meds, orderedMeds=sorted_meds, totalMeds=totalMedications, medNotes=notes, medTime = medicine_time, currentTime = current_time)
 
 @app.route('/delete/<int:id>')
 def delete(id):
