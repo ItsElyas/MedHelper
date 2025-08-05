@@ -60,7 +60,7 @@ def index():    # Function to handle requests to the index page
         # Need to understand this ASAP
         sorted_meds = sorted(meds, key=lambda med: med.time if med.time is not None else datetime.min.time())
         upcoming_medsToday =[]
-        return render_template('index.html', medicines=meds, orderedMeds=sorted_meds, totalMeds=totalMedications, medNotes=notes, medTime = medicine_time, currentTime = current_time)
+        return render_template('index.html', medicines=meds, orderedMeds=sorted_meds, totalMeds=totalMedications, medNotes=notes, medTime = medicine_time, currentTime = current_time, medToEdit = None)
 
 @app.route('/delete/<int:id>')
 def delete(id):
@@ -80,7 +80,7 @@ def edit(id):
     if request.method == 'POST': 
         medToChange.name = request.form['medicineName']
         medToChange.dosage = request.form['medicineDose']
-        medToChange.time = request.form.get('timeToTake')
+        medToChange.time = datetime.strptime(request.form.get('timeToTake'), '%H:%M').time()
         
         try:
             db.session.commit()
@@ -89,48 +89,49 @@ def edit(id):
         except:
             return 'There was a problem changing your medications'
     else:
-        return render_template('index.html',medicines=medToChange) 
+        allMeds = Medicine.query.all()
+        return render_template('index.html', medicines = allMeds, medToEdit=medToChange) 
     
     
  #NEEDS TO BE FIXED IT GETS 404
-@app.route('/checkMedications/<int:id>', methods=['POST'])
-def checkMedications(id):
-    currentTime = datetime.now().time()
-    medicines = Medicine.query.all()
-    med = Medicine.query.get_or_404(id)
-    overdueMeds = []
-    takenMeds = []
+# @app.route('/checkMedications/<int:id>', methods=['POST'])
+# def checkMedications(id):
+#     currentTime = datetime.now().time()
+#     medicines = Medicine.query.all()
+#     med = Medicine.query.get_or_404(id)
+#     overdueMeds = []
+#     takenMeds = []
     
-    checkedIds = request.form.getlist('medicineCheck') #Makes a list of strings for the form that got submitted
-    checkedIds = list(map(int, checkedIds)) #Then converts them to ints
+#     checkedIds = request.form.getlist('medicineCheck') #Makes a list of strings for the form that got submitted
+#     checkedIds = list(map(int, checkedIds)) #Then converts them to ints
     
-    for med in medicines:
-        if med.id in checkedIds:
-            med.taken = True
-            takenMeds.append({
-                    'id': med.id,
-                    'name':med.name,
-                    'time': med.time.strftime('%I:%M %p'),
-                    'dosage': med.dosage,
-                    'taken' :med.taken,
-            })
-        else:
-            med.taken = False    
+#     for med in medicines:
+#         if med.id in checkedIds:
+#             med.taken = True
+#             takenMeds.append({
+#                     'id': med.id,
+#                     'name':med.name,
+#                     'time': med.time.strftime('%I:%M %p'),
+#                     'dosage': med.dosage,
+#                     'taken' :med.taken,
+#             })
+#         else:
+#             med.taken = False    
             
-        if med.time and med.time < currentTime:
-            med.missed = True
-            overdueMeds.append({
-                'id': med.id,
-                'name':med.name,
-                'time': med.time.strftime('%I:%M %p'),
-                'dosage': med.dosage,
-                'missed' : med.missed
-            })
-        else:
-            med.missed = False
+#         if med.time and med.time < currentTime:
+#             med.missed = True
+#             overdueMeds.append({
+#                 'id': med.id,
+#                 'name':med.name,
+#                 'time': med.time.strftime('%I:%M %p'),
+#                 'dosage': med.dosage,
+#                 'missed' : med.missed
+#             })
+#         else:
+#             med.missed = False
 
-    db.session.commit()
-    return jsonify({'missed': overdueMeds, 'taken':takenMeds})
+#     db.session.commit()
+#     return jsonify({'missed': overdueMeds, 'taken':takenMeds})
 
 
 if __name__ == "__main__":

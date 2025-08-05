@@ -70,7 +70,7 @@
                         <a href="/delete/{{med.id}}" alt="Delete">
                             <i class="fa-solid fa-trash-can"></i></a>
                             <!--So this works but the logic doesnt work kinda 2 steps foward one step back-->
-                        <!--<a href="/edit/{{med.id}}" alt="Edit">-->
+                        <a href="/edit/{{med.id}}" alt="Edit">
                             <i class="fa-solid fa-pen-to-square" onclick="showForm()"></i></a>
                         </div>
 
@@ -93,13 +93,13 @@
         <div id="MedicineDiv" style="display: none;">
             <form method="POST" class="medicineForm">
                 <label for="medicineName">Medicine Name:</label><br>
-                <input type="text" id="medicineName" name="medicineName"  required><br>
+                <input type="text" id="medicineName" name="medicineName" value="{{ medToEdit.name if medToEdit }}" required><br>
 
                 <label for="medicineDose">Medicine Dose (mg):</label><br>
-                <input type="number" id="medicineDose" name="medicineDose" required><br>
+                <input type="number" id="medicineDose" name="medicineDose" value="{{ medToEdit.dose if medToEdit }}" required><br>
 
                 <label for="Notes">Notes (Optinal)</label><br>
-                <input type="text" id="Notes" name="Notes"><br>
+                <input type="text" id="Notes" name="Notes" value="{{ medToEdit.comments if medToEdit }}" ><br>
 
                 <label for="medicineFrequency">Frequency:</label><br>
                 <select id="Frequency" name="Frequency">
@@ -110,7 +110,7 @@
                 </select><br>
 
                 <label for="timeForMedicine">Times to take:</label><br>
-                <input type="time" id="timeToTake" name="timeToTake" required><br>
+                <input type="time" id="timeToTake" name="timeToTake"value="{{ medToEdit.time if medToEdit }}"  required><br>
                 
             <div class='actionBtn'>
                 <input type="submit" value="Submit" id="submit" >
