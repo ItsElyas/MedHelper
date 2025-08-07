@@ -25,10 +25,11 @@
     <div class="UpcomingMeds">
         <h1>Upcoming Medications</h1>
         <div class="UpcomingMedDiv">
-         {% for med in orderedMeds %}
-            <p id="UpcomingMedName">{{med.name}}</p>
-            <p id="UpcomingMedTime"></p>
-            {%endfor%}
+        {% for med in orderedMeds %}
+            {% if med.time %}
+                <li>{{ med.name }} in {{ timeLeft }}</li>  <!--This Doesnt work left-->
+            {% endif %}
+        {% endfor %}
         </div>
     </div>
     
