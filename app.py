@@ -9,7 +9,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # This suppresses a warning
 
 db = SQLAlchemy(app)    #initilizes the database
 
-class Medicine(db.Model):   #This creats a table called 'medicine
+#This creates a table called Medicine for the database that stores all the data related to the medicine the user will take
+class Medicine(db.Model):   
     id = db.Column(db.Integer, primary_key=True) # This is an int that references the ID each entry
     name = db.Column(db.String(100), nullable=False)    # Name of medicine
     dosage = db.Column(db.String(50), nullable=False)   # Dosage of medicine
@@ -21,12 +22,14 @@ class Medicine(db.Model):   #This creats a table called 'medicine
     def __repr__(self):
         return f'<Medicine {self.name}>'
 
+#INDEX ROUTE: This route is for the main page of the website. its use for it is for most of the data on the main page and 
+# shows the data for the user like totalMeds taken, all meds, and the list of when to take the meds
+
 @app.route('/', methods=['POST', 'GET']) # Defines the route for the index page
 def index():    # Function to handle requests to the index page
-    medicine_time = None
-    current_time = datetime.now().time
-    if request.method == 'POST':
-        #add medicine tags
+    medicine_time = None    
+    current_time = datetime.now().time # This is grabbing the current time but dont know how well it works
+    if request.method == 'POST':       # If the request method is post which it is since since we have the submit it grabs the data
         name = request.form['medicineName']
         dosage = request.form['medicineDose']
         doseTime = request.form.get('timeToTake')
@@ -35,9 +38,9 @@ def index():    # Function to handle requests to the index page
         if not name or not dosage:
             return redirect('/')
             
-        medicine_time = datetime.strptime(doseTime, '%H:%M').time()
-        new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time, comments=notes)
-        
+        medicine_time = datetime.strptime(doseTime, '%H:%M').time() # This is grabbing the dose time and converting it in hour : minuts
+        new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time, comments=notes)   # this is saving a new medicine with all the data the user added and saving it in the class and DB
+
         try:
             db.session.add(new_medicine)
             db.session.commit()
@@ -45,16 +48,17 @@ def index():    # Function to handle requests to the index page
         
         except:
             return 'There was an error adding your medication'
-            
-    else:
-        meds = Medicine.query.all()
-        totalMedications = Medicine.query.count()
+    # This else happens when the Post is done and now the data from the post will go here  
+    else: 
+        meds = Medicine.query.all() # grabs all the medicine in the Med Class and saves it in meds
+        totalMedications = Medicine.query.count()   # This just counts the meds and uses it for percentages
         notes = [med.comments for med in meds]
         # Need to understand this ASAP
         sorted_meds = sorted(meds, key=lambda med: med.time if med.time is not None else datetime.min.time())
         upcoming_medsToday =[]
         return render_template('index.html', medicines=meds, orderedMeds=sorted_meds, totalMeds=totalMedications, medNotes=notes, medTime = medicine_time, currentTime = current_time, medToEdit = None)
 
+#DELETE ROUTE: This is for deleting the meds that are no longer being taking by the user
 @app.route('/delete/<int:id>')
 def delete(id):
     medToDelete = Medicine.query.get_or_404(id)
