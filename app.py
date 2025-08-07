@@ -11,12 +11,12 @@ db = SQLAlchemy(app)    #initilizes the database
 
 class Medicine(db.Model):   #This creats a table called 'medicine
     id = db.Column(db.Integer, primary_key=True) # This is an int that references the ID each entry
-    name = db.Column(db.String(100), nullable=False)
-    dosage = db.Column(db.String(50), nullable=False)
-    time = db.Column(db.Time, nullable=False)   #FIXED
-    comments = db.Column(db.String(250), nullable=True)
-    taken = db.Column(db.Boolean, default=False)
-    missed = db.Column(db.Boolean, default=False)
+    name = db.Column(db.String(100), nullable=False)    # Name of medicine
+    dosage = db.Column(db.String(50), nullable=False)   # Dosage of medicine
+    time = db.Column(db.Time, nullable=False)           # Time of dose for medicine
+    comments = db.Column(db.String(250), nullable=True) # Comments for the medicine
+    taken = db.Column(db.Boolean, default=False)        # If the med was taken that day
+    missed = db.Column(db.Boolean, default=False)       # If the med wasnt taken that day
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
@@ -34,16 +34,9 @@ def index():    # Function to handle requests to the index page
         
         if not name or not dosage:
             return redirect('/')
-        
-       
             
         medicine_time = datetime.strptime(doseTime, '%H:%M').time()
-        # exising_med = Medicine.query.filter_by(name = name).first()
-        # if exising_med:
-        #     return redirect('/')
-        
         new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time, comments=notes)
-        
         
         try:
             db.session.add(new_medicine)
@@ -92,47 +85,6 @@ def edit(id):
         allMeds = Medicine.query.all()
         return render_template('index.html', medicines = allMeds, medToEdit=medToChange) 
     
-    
- #NEEDS TO BE FIXED IT GETS 404
-# @app.route('/checkMedications/<int:id>', methods=['POST'])
-# def checkMedications(id):
-#     currentTime = datetime.now().time()
-#     medicines = Medicine.query.all()
-#     med = Medicine.query.get_or_404(id)
-#     overdueMeds = []
-#     takenMeds = []
-    
-#     checkedIds = request.form.getlist('medicineCheck') #Makes a list of strings for the form that got submitted
-#     checkedIds = list(map(int, checkedIds)) #Then converts them to ints
-    
-#     for med in medicines:
-#         if med.id in checkedIds:
-#             med.taken = True
-#             takenMeds.append({
-#                     'id': med.id,
-#                     'name':med.name,
-#                     'time': med.time.strftime('%I:%M %p'),
-#                     'dosage': med.dosage,
-#                     'taken' :med.taken,
-#             })
-#         else:
-#             med.taken = False    
-            
-#         if med.time and med.time < currentTime:
-#             med.missed = True
-#             overdueMeds.append({
-#                 'id': med.id,
-#                 'name':med.name,
-#                 'time': med.time.strftime('%I:%M %p'),
-#                 'dosage': med.dosage,
-#                 'missed' : med.missed
-#             })
-#         else:
-#             med.missed = False
-
-#     db.session.commit()
-#     return jsonify({'missed': overdueMeds, 'taken':takenMeds})
-
 
 if __name__ == "__main__":
     with app.app_context():
