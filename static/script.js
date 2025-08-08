@@ -81,7 +81,8 @@ medicineCheckBox.forEach(checkbox => {
     checkbox.addEventListener('change',updateProgress)
 });
 updateProgress();
-
+//!DOES NOT FULLY WORK:
+//TODO: make it check if it has been checked already today and if so keep it checked even after refreshing the page
 medicineCheckBox.forEach(checkbox => {
     checkbox.addEventListener('change', function() {
         const medName = this.parentElement.querySelector('.medName');
@@ -92,12 +93,7 @@ medicineCheckBox.forEach(checkbox => {
 
         const timeNow = new Date();
   
-        
-        // const medTimeHour = medTime.getHours();
-        // const medTimeMinute = medTime.getMinutes();
-        // const medTimeInMinutes = medTimeHour * 60 + medTimeMinute;
-        // console.log(currentHour);
-        // console.log(medTime);
+
         
 
         if (this.checked) {

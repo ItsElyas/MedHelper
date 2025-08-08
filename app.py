@@ -21,7 +21,7 @@ class Medicine(db.Model):
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
-
+# TODO: Must fix the time issue with the medicine showing how much time is left before taking the medicine
 #INDEX ROUTE: This route is for the main page of the website. its use for it is for most of the data on the main page and 
 # shows the data for the user like totalMeds taken, all meds, and the list of when to take the meds
 @app.route('/', methods=['POST', 'GET']) # Defines the route for the index page
@@ -39,19 +39,21 @@ def index():
             return redirect('/')
         
         #Wont Work 
-        medicine_time = datetime.combine(date.today(), datetime.strptime(doseTime, '%H:%M').time())  # This is grabbing the dose time and converting it in hour : minuts
-        time_left = medicine_time - current_time
+        current_time = datetime.strptime(current_time, '%H:%M').time()
+        medicine_time = datetime.strptime(doseTime, '%H:%M').time()  # This is grabbing the dose time and converting it in hour : minuts
+        
+        today = datetime.now().time()
+        current_dt = datetime.combine(today, current_time)
+        medicine_dt = datetime.combine(today, medicine_time)
+        time_left = medicine_dt - current_dt
+
         
         if time_left.total_seconds() < 0:
             missed = True
         else:
             missed = False
             
-        next_med = None
-        for med in sorted_meds:
-            if med.time > current_time:
-                next_med = med
-                break
+        
             
         new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time, comments=notes, TimeLeft = time_left)   # this is saving a new medicine with all the data the user added and saving it in the class and DB
 
@@ -85,6 +87,8 @@ def delete(id):
     except:
         return 'There was a problem deleting your medications'
 
+#!DOES NOT WORK:
+# TODO : when clicked on then edit button it then hides all medications once showed and also opens and closes the form instantly
 #EDIT ROUTE: Chooses the med you want to edit and changes what is saved in the database like the name time and dosage    
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
