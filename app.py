@@ -42,10 +42,10 @@ def index():
         current_time = datetime.strptime(current_time, '%H:%M').time()
         medicine_time = datetime.strptime(doseTime, '%H:%M').time()  # This is grabbing the dose time and converting it in hour : minuts
         
-        today = datetime.now().time()
-        current_dt = datetime.combine(today, current_time)
-        medicine_dt = datetime.combine(today, medicine_time)
-        time_left = medicine_dt - current_dt
+        today = datetime.datetime.now()
+        current_intTime = int(today.timestamp())
+        medicine_intTime = int(medicine_time.timestamp())
+        time_left = medicine_intTime - current_intTime
 
         
         if time_left.total_seconds() < 0:
