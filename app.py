@@ -26,36 +26,25 @@ class Medicine(db.Model):
 # shows the data for the user like totalMeds taken, all meds, and the list of when to take the meds
 @app.route('/', methods=['POST', 'GET']) # Defines the route for the index page
 def index():
-    medicine_time = None    
-    time_left = None
     current_time = datetime.now() # This is grabbing the current time but dont know how well it works   
     if request.method == 'POST':       # If the request method is post which it is since since we have the submit it grabs the data
         name = request.form['medicineName']
         dosage = request.form['medicineDose']
-        doseTime = request.form.get('timeToTake')
+        doseTimeString = request.form.get('timeToTake')
         notes = request.form['Notes']
         
         if not name or not dosage:
             return redirect('/')
-        
-        #Wont Work 
+        #TODO: Make these variables not local so they can be used in the else to render template
+        current_time = datetime.now()
         current_time = datetime.strptime(current_time, '%H:%M').time()
-        medicine_time = datetime.strptime(doseTime, '%H:%M').time()  # This is grabbing the dose time and converting it in hour : minuts
+        medicine_time = datetime.strptime(doseTimeString, '%H:%M').time()  # This is grabbing the dose time and converting it in hour : minuts
         
-        today = datetime.datetime.now()
-        current_intTime = int(today.timestamp())
-        medicine_intTime = int(medicine_time.timestamp())
-        time_left = medicine_intTime - current_intTime
 
-        
-        if time_left.total_seconds() < 0:
-            missed = True
-        else:
-            missed = False
+        time_left = medicine_time - current_time
+
             
-        
-            
-        new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time, comments=notes, TimeLeft = time_left)   # this is saving a new medicine with all the data the user added and saving it in the class and DB
+        new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time, comments=notes)   # this is saving a new medicine with all the data the user added and saving it in the class and DB
 
         try:
             db.session.add(new_medicine)
