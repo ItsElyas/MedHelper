@@ -26,7 +26,7 @@ class Medicine(db.Model):
 # shows the data for the user like totalMeds taken, all meds, and the list of when to take the meds
 @app.route('/', methods=['POST', 'GET']) # Defines the route for the index page
 def index():
-    current_time = datetime.now() # This is grabbing the current time but dont know how well it works   
+    current_time = datetime.now().strftime("%H:%M") # This is grabbing the current time but dont know how well it works   
     if request.method == 'POST':       # If the request method is post which it is since since we have the submit it grabs the data
         name = request.form['medicineName']
         dosage = request.form['medicineDose']
@@ -57,11 +57,12 @@ def index():
     else: # This else happens when the Post is done and now the data from the post will go here 
         meds = Medicine.query.all() # grabs all the medicine in the Med Class and saves it in meds
         totalMedications = Medicine.query.count()   # This just counts the meds and uses it for percentages
+        med_times = [med.time for med in meds]
         notes = [med.comments for med in meds]      # saving all the notes for any meds that need them
         # Need to understand this ASAP
         sorted_meds = sorted(meds, key=lambda med: med.time if med.time is not None else datetime.min.time())
         upcoming_medsToday =[]
-        return render_template('index.html', medicines=meds, orderedMeds=sorted_meds, totalMeds=totalMedications, medNotes=notes, medTime = medicine_time, currentTime = current_time, timeLeft = time_left, medToEdit = None) # Puts all the data saved on the web
+        return render_template('index.html', medicines=meds, orderedMeds=sorted_meds, totalMeds=totalMedications, medNotes=notes, medTimes = med_times, currentTime = current_time, medToEdit = None) # Puts all the data saved on the web
 
 #DELETE ROUTE: This is for deleting the meds that are no longer being taking by the user
 @app.route('/delete/<int:id>')

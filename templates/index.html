@@ -22,12 +22,12 @@
         <p id="progress" data-total-meds="{{totalMeds}}"></p>
     </div>
     <!--THIS WILL SHOW TODAYS MEDICINE AND WILL ONLY SHOW MEDS THAT I NEED TAKE NOT PASSED OR HAVE TAKEN-->
-    <div class="UpcomingMeds">
+    <div class="UpcomingMeds" http-equiv="refresh" content="60">
         <h1>Upcoming Medications</h1>
         <div class="UpcomingMedDiv">
         {% for med in orderedMeds %}
             {% if med.time %}
-                <li>{{ med.name }} in {{ timeLeft }}</li>  <!--This Doesnt work-->
+                <li>{{ med.name }} at {{ med.time }}</li>  <!--This Doesnt work-->
             {% endif %}
         {% endfor %}
         </div>
