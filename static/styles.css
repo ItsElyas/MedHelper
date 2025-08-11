@@ -77,7 +77,7 @@
 
         #progressBar {
             align-items: center;
-            width: 550px;
+            display: flex;
             height: 30px;
             background-color: #dad8d8;
             border-radius: 10px;

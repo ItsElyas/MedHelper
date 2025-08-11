@@ -37,7 +37,7 @@ def index():
             return redirect('/')
         #TODO: Make these variables not local so they can be used in the else to render template
         medicine_time = datetime.strptime(doseTimeString, '%H:%M').time()  # This is grabbing the dose time and converting it in hour : minuts
-        time_left = medicine_time - current_time
+        # time_left = medicine_time - current_time
 
             
         new_medicine = Medicine(name=name, dosage=dosage, time=medicine_time, comments=notes)   # this is saving a new medicine with all the data the user added and saving it in the class and DB
