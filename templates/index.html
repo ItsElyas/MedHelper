@@ -27,7 +27,7 @@
         <div class="UpcomingMedDiv">
         {% for med in orderedMeds %}
             {% if med.time %}
-                <li>{{ med.name }} at {{ med.time }}</li>  <!--This Doesnt work-->
+                <li>{{ med.name }} at {{ med.time.strftime('%I:%M %p') }}</li>  <!--This Doesnt work-->
             {% endif %}
         {% endfor %}
         </div>

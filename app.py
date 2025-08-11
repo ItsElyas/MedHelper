@@ -36,11 +36,7 @@ def index():
         if not name or not dosage:
             return redirect('/')
         #TODO: Make these variables not local so they can be used in the else to render template
-        current_time = datetime.now()
-        current_time = datetime.strptime(current_time, '%H:%M').time()
         medicine_time = datetime.strptime(doseTimeString, '%H:%M').time()  # This is grabbing the dose time and converting it in hour : minuts
-        
-
         time_left = medicine_time - current_time
 
             
