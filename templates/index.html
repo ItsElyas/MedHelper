@@ -40,7 +40,7 @@
         <div class="scheduleCheckList">
         <form id="medForm" method="POST">
             {% for med in orderedMeds %}
-                    <div class="medicineCheckList {% if med.missed %}missed{% endif %} " id="med-{{ med.id }}"> <!--This is giving each med a uniqe id and a class called "missed if its missed"-->
+                    <div class="medicineCheckList {% if med.taken %}taken{% endif %} " id="med-{{ med.id }}"> <!--This is giving each med a uniqe id and a class called "missed if its missed"-->
                         <!--ADD AN IF STATMENT TO ADD A ! IF THE TIME HAS PASSED-->
                         <input type="checkbox" class="MedicineCheckBox" name="medicineCheck" value = "{{med.id}}">
                         <strong><span class='medName'>{{ med.name }}</span></strong><br>

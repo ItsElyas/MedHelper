@@ -21,6 +21,7 @@ class Medicine(db.Model):
     
     def __repr__(self):
         return f'<Medicine {self.name}>'
+    
 # TODO: Must fix the time issue with the medicine showing how much time is left before taking the medicine
 #INDEX ROUTE: This route is for the main page of the website. its use for it is for most of the data on the main page and 
 # shows the data for the user like totalMeds taken, all meds, and the list of when to take the meds
