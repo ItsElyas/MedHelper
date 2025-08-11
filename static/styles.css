@@ -303,3 +303,7 @@
         .medicineInfo {
             float: left;
         }
+
+        .UpcomingMedDiv {
+            text-align: center;
+        }
