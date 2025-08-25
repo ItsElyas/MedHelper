@@ -72,7 +72,7 @@
                             <i class="fa-solid fa-trash-can"></i></a>
                             <!--So this works but the logic doesnt work kinda 2 steps foward one step back-->
                         <a href="/edit/{{med.id}}" alt="Edit">
-                            <i class="fa-solid fa-pen-to-square" onclick="showForm()"></i></a>
+                            <i class="fa-solid fa-pen-to-square"></i></a>
                         </div>
 
                     <div class="medicineInfo">
@@ -91,13 +91,13 @@
 
         <button onclick="showForm()" id="addMedicine">Add Medicine</button><br>
 
-        <div id="MedicineDiv" style="display: none;">
+        <div id="MedicineDiv" style="{% if medToEdit %}display: block;{% else %}display: none;{% endif %}">
             <form method="POST" class="medicineForm">
                 <label for="medicineName">Medicine Name:</label><br>
                 <input type="text" id="medicineName" name="medicineName" value="{{ medToEdit.name if medToEdit }}" required><br>
 
                 <label for="medicineDose">Medicine Dose (mg):</label><br>
-                <input type="number" id="medicineDose" name="medicineDose" value="{{ medToEdit.dose if medToEdit }}" required><br>
+                <input type="number" id="medicineDose" name="medicineDose" value="{{ medToEdit.dosage if medToEdit }}" required><br>
 
                 <label for="Notes">Notes (Optinal)</label><br>
                 <input type="text" id="Notes" name="Notes" value="{{ medToEdit.comments if medToEdit }}" ><br>
