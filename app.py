@@ -58,6 +58,7 @@ def index():
         notes = [med.comments for med in meds]      # saving all the notes for any meds that need them
         # Need to understand this ASAP
         sorted_meds = sorted(meds, key=lambda med: med.time if med.time is not None else datetime.min.time())
+        
         upcoming_medsToday =[]
         return render_template('index.html', medicines=meds, orderedMeds=sorted_meds, totalMeds=totalMedications, medNotes=notes, medTimes = med_times, currentTime = current_time, medToEdit = None) # Puts all the data saved on the web
 
